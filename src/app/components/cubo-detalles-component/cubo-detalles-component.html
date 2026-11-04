@@ -1,0 +1,15 @@
+<div>
+    <img src={{cubo.imagen}} width="300px" class="card-img-top"/>
+
+    <div class="card-body">
+        <h5 class="card-title">{{ cubo.nombre }}</h5>
+        <p class="card-text">Marca: {{ cubo.marca }}</p>
+        <p class="card-text">Precio: ${{ cubo.precio }}.00</p>
+        <p class="card-text">Color: {{ cubo.color }}</p>
+    </div>
+
+    <button (click)="marcarFavorito()" class="btn btn-warning">
+        Seleccionar favorito
+    </button>
+
+</div>

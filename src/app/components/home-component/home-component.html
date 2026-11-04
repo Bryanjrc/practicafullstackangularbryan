@@ -1,0 +1,26 @@
+<h1>Home Cubos</h1>
+
+@if(cuboFavorito) {
+    <div class="alert alert-warning">
+        <h2>Mi cubo favorito es: {{ cuboFavorito.nombre }}</h2>
+        <p>Marca: {{ cuboFavorito.marca }}</p>
+        <p>Precio: {{ cuboFavorito.precio}}</p>
+        <p>Color: {{ cuboFavorito.color }}</p>
+    </div>
+}
+
+@if(cubos.length > 0) {
+    <div>
+        <h2>Lista de cubos</h2>
+        <ul>
+            @for (cubo of cubos; track cubo.idCubo) {
+                <li>
+                    {{ cubo.nombre }} -
+                    ${{ cubo.precio }}.00 -
+                    <img src={{cubo.imagen}} width="300px">
+                </li>
+                
+            }
+        </ul>
+    </div>
+}

@@ -1,0 +1,8 @@
+<h1>Cubos de la marca: {{marca}}</h1>
+
+@if (cubos.length > 0) {
+    @for (cubo of cubos; track cubo.idCubo) {
+        <app-cubo-detalles-component [cubo] = "cubo"></app-cubo-detalles-component>
+        <hr/>
+    }
+}
