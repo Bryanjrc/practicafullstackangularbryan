@@ -3,6 +3,6 @@ export class Compra {
         public idCubo: number,
         public idPedido: number,
         public idUsuario: number,
-        public fechaPedido: String
-    ) {}
+        public fechaPedido: string
+    ) { }
 }

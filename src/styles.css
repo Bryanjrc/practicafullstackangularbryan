@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bs-primary: #6558f5;
+  --bs-primary-rgb: 101, 88, 245;
+  --bs-body-bg: #f6f7fb;
+  --bs-body-color: #1f2937;
+}
+
+body {
+  min-width: 320px;
+  font-family: 'Inter', sans-serif;
+  background: var(--bs-body-bg);
+}
+
+.app-page {
+  min-height: calc(100vh - 72px);
+}
+
+.section-heading {
+  letter-spacing: -0.03em;
+}
+
+.card {
+  border: 0;
+  box-shadow: 0 0.5rem 1.5rem rgba(31, 41, 55, 0.08);
+}
+
+.btn-primary {
+  --bs-btn-bg: #6558f5;
+  --bs-btn-border-color: #6558f5;
+  --bs-btn-hover-bg: #5145d8;
+  --bs-btn-hover-border-color: #5145d8;
+}

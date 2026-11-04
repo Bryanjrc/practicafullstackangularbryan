@@ -1,14 +1,20 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" [routerLink]="['/']">
+            <span class="badge rounded-pill text-bg-primary">RC</span>
+            Rubik Cubes
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir navegación">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-2">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" [routerLink]="['/']">Home</a>
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/']">Inicio</a>
+                </li>
+                <li class="nav-item" *ngIf="isLoggedIn()">
+                    <a class="nav-link" [routerLink]="['/perfil']">Mi perfil</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -16,25 +22,20 @@
                         Marcas
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        @for (marca of marcas; track marca) {
-                            <li>
-                                <a class="dropdown-item" [routerLink]="['cubosmarca', marca]">
-                                    {{ marca }}
-                                </a>
-                            </li>
-                        }
+                        <li *ngFor="let marca of marcas">
+                            <a class="dropdown-item" [routerLink]="['/cubosmarca', marca]">{{ marca }}</a>
+                        </li>
                     </ul>
                 </li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Seguridad
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" [routerLink]="['/login']">Login</a></li>
+                        <li *ngIf="!isLoggedIn()"><a class="dropdown-item" [routerLink]="['/login']">Iniciar sesión</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/registro']">Crear cuenta</a></li>
+                        <li *ngIf="isLoggedIn()"><button class="dropdown-item" type="button" (click)="logout()">Cerrar sesión</button></li>
                     </ul>
                 </li>
             </ul>

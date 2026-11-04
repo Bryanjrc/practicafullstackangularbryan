@@ -1,0 +1,27 @@
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card rounded-4">
+                <div class="card-body p-4 p-md-5">
+                    <p class="text-primary fw-semibold mb-1">ZONA DE SEGURIDAD</p>
+                    <h1 class="h2 fw-bold mb-4">Mi perfil</h1>
+
+                    <div *ngIf="usuario; else cargando">
+                        <div class="profile-avatar mb-4">{{ usuario.nombre.charAt(0) }}</div>
+                        <dl class="row mb-0">
+                            <dt class="col-sm-4">Nombre</dt>
+                            <dd class="col-sm-8">{{ usuario.nombre }}</dd>
+                            <dt class="col-sm-4">Email</dt>
+                            <dd class="col-sm-8">{{ usuario.email }}</dd>
+                        </dl>
+                    </div>
+
+                    <ng-template #cargando>
+                        <p *ngIf="!mensaje" class="text-body-secondary mb-0">Cargando perfil...</p>
+                        <div *ngIf="mensaje" class="alert alert-danger mb-0">{{ mensaje }}</div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

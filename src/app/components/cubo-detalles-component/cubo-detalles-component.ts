@@ -1,4 +1,5 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Cubo } from '../../models/cubo';
 import { ServiceTiendaCubos } from '../../services/service.tienda.cubos';
 
@@ -6,27 +7,34 @@ import { ServiceTiendaCubos } from '../../services/service.tienda.cubos';
   selector: 'app-cubo-detalles-component',
   standalone: false,
   styleUrl: './cubo-detalles-component.css',
-  templateUrl: './cubo-detalles-component.html',
+  templateUrl: './cubo-detalles-component.html'
 })
-export class CuboDetallesComponent {
-  @Input() cubo!: Cubo;
+export class CuboDetallesComponent implements OnInit {
+  public cubo!: Cubo;
+  public mensaje = '';
 
-  @Output() seleccionarFavorito: EventEmitter<Cubo> =
-    new EventEmitter<Cubo>();
+  constructor(
+    private _service: ServiceTiendaCubos,
+    private _route: ActivatedRoute,
+    private _cdr: ChangeDetectorRef
+  ) {}
 
-    constructor(private _service: ServiceTiendaCubos){}
-
-  marcarFavorito(): void {
-    this.seleccionarFavorito.emit(this.cubo);
+  ngOnInit(): void {
+    this._route.paramMap.subscribe((params) => {
+      const idCubo = Number(params.get('idCubo'));
+      if (idCubo > 0) {
+        void this.cargarCubo(idCubo);
+      }
+    });
   }
-  
-  async comprarCubo(): Promise<void> {
+
+  private async cargarCubo(idCubo: number): Promise<void> {
     try {
-      await this._service.insertarPedidoAsync(this.cubo.idCubo);
-      alert("Pedido insertado correctamente");
+      this.cubo = await this._service.getCuboAsync(idCubo);
     } catch (error) {
-      console.error("Error al insertar el pedido:", error);
+      console.error('Error al cargar el cubo:', error);
+      this.mensaje = 'No se ha podido cargar el cubo.';
     }
+    this._cdr.detectChanges();
   }
-
 }

@@ -1,26 +1,23 @@
-<div class="card-cubo">
-    <div class="card-image">
-        <img src={{cubo.imagen}} style="width: 150px;" class="card-img-top"/>
-
-        <div class="card-body">
-            <h5 class="card-title">{{ cubo.nombre }}</h5>
-            <p class="card-text">Marca: {{ cubo.marca }}</p>
-            <p class="card-text">Precio: ${{ cubo.precio }}.00</p>
-            <p class="card-text">Color: {{ cubo.color }}</p>
+<div class="container py-5" *ngIf="cubo; else cargando">
+    <div class="card rounded-4 overflow-hidden">
+        <div class="row g-0 align-items-center">
+            <div class="col-lg-6 cube-image p-4 p-md-5">
+                <img [src]="cubo.imagen" class="img-fluid rounded" [alt]="cubo.nombre">
+            </div>
+            <div class="col-lg-6">
+                <div class="card-body p-4 p-md-5">
+                    <span class="badge rounded-pill text-bg-primary mb-3">{{ cubo.marca }}</span>
+                    <h1 class="display-6 fw-bold">{{ cubo.nombre }}</h1>
+                    <p class="text-body-secondary">{{ cubo.modelo }} · {{ cubo.color }}</p>
+                    <p class="fs-2 text-primary fw-bold">{{ cubo.precio }} €</p>
+                    <p class="mb-4">Valoración: <strong>{{ cubo.valoracion }} / 5</strong></p>
+                    <p *ngIf="mensaje" class="alert alert-danger">{{ mensaje }}</p>
+                    <a [routerLink]="['/']" class="btn btn-outline-secondary rounded-pill px-4">Volver al catálogo</a>
+                </div>
+            </div>
         </div>
-
-        <div class="card-footer">
-            <a [routerLink]="['detalles', cubo.idCubo]" class="btn btn-success">
-                Detalles
-            </a>
-            <button (click)="marcarFavorito()" class="btn btn-warning">
-                Seleccionar favorito
-            </button>
-            <button (click)="comprarCubo()">
-                Comprar
-            </button>
-        </div>
-        
     </div>
-
 </div>
+<ng-template #cargando>
+    <div class="container py-5"><div class="alert alert-light border">Cargando cubo...</div></div>
+</ng-template>

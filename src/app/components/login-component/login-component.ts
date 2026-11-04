@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { ServiceTiendaCubos } from '../../services/service.tienda.cubos';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Login } from '../../models/login';
 import { ServiceAuthCubos } from '../../services/service.auth.cubos';
 
@@ -7,23 +7,36 @@ import { ServiceAuthCubos } from '../../services/service.auth.cubos';
   selector: 'app-login-component',
   standalone: false,
   styleUrl: './login-component.css',
-  templateUrl: './login-component.html',
+  templateUrl: './login-component.html'
 })
-export class LoginComponent implements OnInit {
-  private _serviceAuth: ServiceAuthCubos = 
-    inject(ServiceAuthCubos);
-  @ViewChild("cajauser") cajaUser!: ElementRef;
-  @ViewChild("cajapassword") cajaPassword!: ElementRef;
-  public mensaje!: string;
+export class LoginComponent {
+  public email = '';
+  public password = '';
+  public mensaje = '';
+  public cargando = false;
 
   constructor(
-    private _cdr: ChangeDetectorRef,
-    private _service: ServiceTiendaCubos
-  ){}
+    private _service: ServiceAuthCubos,
+    private _router: Router
+  ) {}
 
+  async loginUsuario(): Promise<void> {
+    if (!this.email || !this.password) {
+      this.mensaje = 'Introduce tu email y contraseña.';
+      return;
+    }
 
-
-  ngOnInit(): void {
-    
+    this.cargando = true;
+    this.mensaje = '';
+    try {
+      await this._service.loginUsuarioAsync(
+        new Login(this.email, this.password)
+      );
+      await this._router.navigate(['/perfil']);
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+      this.mensaje = 'Error al iniciar sesión. Comprueba tus credenciales.';
+    }
+    this.cargando = false;
   }
 }

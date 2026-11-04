@@ -1,8 +1,26 @@
-<h1>Cubos de la marca: {{marca}}</h1>
-
-@if (cubos.length > 0) {
-    @for (cubo of cubos; track cubo.idCubo) {
-        <app-cubo-detalles-component [cubo] = "cubo"></app-cubo-detalles-component>
-        <hr/>
-    }
-}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <p class="text-primary fw-semibold mb-1">COLECCIÓN</p>
+            <h1 class="section-heading fw-bold mb-0">{{ marca }}</h1>
+        </div>
+        <span class="text-body-secondary">{{ cubos.length }} productos</span>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+        <div class="col" *ngFor="let cubo of cubos">
+            <article class="card h-100 rounded-4 overflow-hidden">
+                <div class="cube-image p-3">
+                    <img [src]="cubo.imagen" class="card-img-top" [alt]="cubo.nombre">
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h2 class="h5 card-title">{{ cubo.nombre }}</h2>
+                    <p class="text-body-secondary">{{ cubo.modelo }}</p>
+                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                        <span class="fw-bold fs-5">{{ cubo.precio }} €</span>
+                        <a [routerLink]="['/cubos', cubo.idCubo]" class="btn btn-primary rounded-pill px-3">Ver detalles</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>

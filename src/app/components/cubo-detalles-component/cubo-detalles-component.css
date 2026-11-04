@@ -1,0 +1,8 @@
+.cube-image {
+    background: linear-gradient(180deg, #f8f9ff, #eef0ff);
+}
+
+.cube-image img {
+    height: 190px;
+    object-fit: contain;
+}
