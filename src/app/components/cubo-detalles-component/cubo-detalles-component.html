@@ -1,15 +1,26 @@
-<div>
-    <img src={{cubo.imagen}} width="300px" class="card-img-top"/>
+<div class="card-cubo">
+    <div class="card-image">
+        <img src={{cubo.imagen}} style="width: 150px;" class="card-img-top"/>
 
-    <div class="card-body">
-        <h5 class="card-title">{{ cubo.nombre }}</h5>
-        <p class="card-text">Marca: {{ cubo.marca }}</p>
-        <p class="card-text">Precio: ${{ cubo.precio }}.00</p>
-        <p class="card-text">Color: {{ cubo.color }}</p>
+        <div class="card-body">
+            <h5 class="card-title">{{ cubo.nombre }}</h5>
+            <p class="card-text">Marca: {{ cubo.marca }}</p>
+            <p class="card-text">Precio: ${{ cubo.precio }}.00</p>
+            <p class="card-text">Color: {{ cubo.color }}</p>
+        </div>
+
+        <div class="card-footer">
+            <a [routerLink]="['detalles', cubo.idCubo]" class="btn btn-success">
+                Detalles
+            </a>
+            <button (click)="marcarFavorito()" class="btn btn-warning">
+                Seleccionar favorito
+            </button>
+            <button (click)="comprarCubo()">
+                Comprar
+            </button>
+        </div>
+        
     </div>
-
-    <button (click)="marcarFavorito()" class="btn btn-warning">
-        Seleccionar favorito
-    </button>
 
 </div>

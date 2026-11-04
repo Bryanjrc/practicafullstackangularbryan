@@ -12,6 +12,7 @@ import { ServiceTiendaCubos } from './services/service.tienda.cubos';
 import { FormsModule } from '@angular/forms';
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './components/home-component/home-component';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HomeComponent } from './components/home-component/home-component';
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [
     provideBrowserGlobalErrorListeners(),
+    provideHttpClient(),
     AuthGuard,
     ServiceAuthCubos,
     ServiceTiendaCubos,

@@ -25,7 +25,7 @@ export class MenuComponent implements OnInit {
     this._cdr.detectChanges();
   }
 
-  cerrarSesion(): void {
+  logout(): void {
     this._serviceAuth.logout();
     this._router.navigate(['/login']);
   }
